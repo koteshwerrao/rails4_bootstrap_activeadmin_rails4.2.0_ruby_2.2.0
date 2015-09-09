@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,:confirmable, :lockable
 
 devise :omniauthable, :omniauth_providers => [:facebook,:twitter,:linkedin]
-
+attr_accessor :current_password
 
 
 def self.find_for_oauth(auth)

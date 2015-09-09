@@ -16,7 +16,7 @@ class User::OmniauthCallbacksController < Devise::OmniauthCallbacksController
           p 11111111111111111
            #sign_in_and_redirect @user, event: :authentication
            sign_in @user
-           redirect_to "/"
+           redirect_to "/colleges"
            #set_flash_message(:notice, :success) if is_navigational_format?
          else
           p 666666666666666
@@ -40,7 +40,7 @@ def twitter
           p 11111111111111111
            #sign_in_and_redirect @user, event: :authentication
            sign_in @user
-           redirect_to "/"
+           redirect_to "/colleges"
            #set_flash_message(:notice, :success) if is_navigational_format?
          else
           p 666666666666666

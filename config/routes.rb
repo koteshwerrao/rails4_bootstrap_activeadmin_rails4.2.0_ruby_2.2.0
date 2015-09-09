@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   resources :students
 
-  devise_for :users,:controllers => { :omniauth_callbacks => "user/omniauth_callbacks" }
+  devise_for :users,:controllers => { :omniauth_callbacks => "user/omniauth_callbacks",registrations: 'user/registrations' }
   get 'home/index'
 
   #devise_for :users, 

@@ -1,6 +1,6 @@
 class User::RegistrationsController < Devise::RegistrationsController
 # before_filter :configure_sign_up_params, only: [:create]
-# before_filter :configure_account_update_params, only: [:update]
+ before_filter :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   # def new
@@ -18,9 +18,10 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    super
+    resource.update_attributes(password: params[:user][:password])
+  end
 
   # DELETE /resource
   # def destroy
@@ -44,9 +45,10 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   # You can put the params you want to permit in the empty array.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.for(:account_update) << :attribute
-  # end
+   def configure_account_update_params
+    devise_parameter_sanitizer.for(:account_update) { |u| u.permit(:email, :password, :password_confirmation, :current_password)}
+     #devise_parameter_sanitizer.for(:account_update) << :attribute
+   end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
@@ -54,7 +56,11 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+  def after_inactive_sign_up_path_for(resource)
+     # super(resource)
+    redirect_to colleges_path
+   end
+   def update_resource(resource, params)
+     resource.update_without_password(params)
+   end
 end
